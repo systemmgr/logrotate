@@ -163,8 +163,7 @@ run_postinst() {
   [ -f "/etc/logrotate.d/btmp" ] && rm -Rf "/etc/logrotate.d/btmp"
   [ -f "/etc/logrotate.d/wtmp" ] && rm -Rf "/etc/logrotate.d/wtmp"
   cp -Rf "$APPDIR/logrotate.conf" "/etc/logrotate.conf"
-  systemctl restart logrotate &>/dev/null
-  systemctl status logrotate | grep -q 'running'
+  systemctl restart logrotate &>/dev/null || true
 }
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # run post install scripts
