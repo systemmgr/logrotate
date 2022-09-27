@@ -162,7 +162,7 @@ run_postinst() {
   systemmgr_run_post
   [ -f "/etc/logrotate.d/btmp" ] && rm -Rf "/etc/logrotate.d/btmp"
   [ -f "/etc/logrotate.d/wtmp" ] && rm -Rf "/etc/logrotate.d/wtmp"
-  cp -Rf "$APPDIR/etc/logrotate.conf" "/etc/logrotate.conf"
+  cp -Rf "$APPDIR/logrotate.conf" "/etc/logrotate.conf"
   systemctl restart logrotate &>/dev/null
   systemctl status logrotate | grep -q 'running'
 }
