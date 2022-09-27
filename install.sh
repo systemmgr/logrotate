@@ -160,9 +160,15 @@ fi
 # run post install scripts
 run_postinst() {
   systemmgr_run_post
-  [ -f "/etc/logrotate.d/btmp" ] && rm -Rf "/etc/logrotate.d/btmp"
-  [ -f "/etc/logrotate.d/wtmp" ] && rm -Rf "/etc/logrotate.d/wtmp"
-  [ -f "$APPDIR/logrotate.conf" ] && cp -Rf "$APPDIR/logrotate.conf" "/etc/logrotate.conf"
+  if [ -f "/etc/logrotate.d/btmp" ]; then
+    rm -Rf "/etc/logrotate.d/btmp"
+  fi
+  if [ -f "/etc/logrotate.d/wtmp" ]; then
+    rm -Rf "/etc/logrotate.d/wtmp"
+  fi
+  if [ -f "$APPDIR/logrotate.conf" ]; then
+    cp -Rf "$APPDIR/logrotate.conf" "/etc/logrotate.conf"
+  fi
   systemctl restart logrotate &>/dev/null || true
 }
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
